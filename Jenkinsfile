@@ -56,3 +56,4 @@ pipeline {
         }
     }
 }
+github-https
