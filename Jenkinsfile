@@ -1,3 +1,4 @@
+
 pipeline {
     agent any
 
@@ -12,50 +13,22 @@ pipeline {
             }
         }
 
-        stage('Set Up Python Virtual Environment') {
+        stage('Setup Python Env') {
             steps {
-                sh  'python3 -m venv venv'
-                sh './venv/bin/python -m pip install --upgrade pip'
-                sh './venv/bin/pip install panda numpy tensorflow flask'
+                sh '/opt/homebrew/bin/python3 -m venv venv'
+                sh '. venv/bin/activate && pip install --upgrade pip'
+                sh '. venv/bin/activate && pip install -r requirements.txt'
             }
         }
 
-        stage('Run Flask App') {
+        stage('Run Script') {
             steps {
-                sh './venv/bin/python app.py'
-            }
-        }
-    }
-}
-pipeline {
-    agent any
-
-    environment {
-        VENV = "venv"
-    }
-
-    stages {
-        stage('Clone GitHub Repo') {
-            steps {
-                git branch: 'main', credentialsId: 'github-https', url: 'https://github.com/AVVAVAISHNAVI/Pipelining_pythonApp.git'
-            }
-        }
-
-        stage('Set Up Python Virtual Environment') {
-            steps {
-                sh 'python3 -m venv venv'
-                sh './venv/bin/python -m pip install --upgrade pip'
-                sh './venv/bin/pip install -r requirements.txt'
-            }
-        }
-
-        stage('Run Flask App') {
-            steps {
-                sh './venv/bin/python app.py'
+                sh '. venv/bin/activate && python app.py'
             }
         }
     }
 }
-github-https
+
+
 
 
