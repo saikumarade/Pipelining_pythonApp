@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import flask, request, render_template
 from model import train_model
 import numpy as np
 
@@ -21,4 +21,5 @@ def home():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
 
