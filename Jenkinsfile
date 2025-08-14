@@ -1,29 +1,29 @@
-
 pipeline {
     agent any
 
     environment {
         VENV = "venv"
+        PYTHON = "/opt/homebrew/bin/python3"   // Change if 'which python3' gives a different path
     }
 
     stages {
         stage('Clone GitHub Repo') {
             steps {
-                git branch: 'main', credentialsId: 'github-https', url: 'https://github.com/AVVAVAISHNAVI/Pipelining_pythonApp.git'
+                git branch: 'main', url: 'https://github.com/AVVAVAISHNAVI/Pipelining_pythonApp.git'
             }
         }
 
-        stage('Setup Python Env') {
+        stage('Setup Python Environment') {
             steps {
-                sh '/opt/homebrew/bin/python3 -m venv venv'
-                sh '. venv/bin/activate && pip install --upgrade pip'
-                sh '. venv/bin/activate && pip install -r requirements.txt'
+                sh '${PYTHON} -m venv ${VENV}'
+                sh '. ${VENV}/bin/activate && pip install --upgrade pip'
+                sh '. ${VENV}/bin/activate && pip install -r requirements.txt'
             }
         }
 
-        stage('Run Script') {
+        stage('Run Python Script') {
             steps {
-                sh '. venv/bin/activate && python app.py'
+                sh '. ${VENV}/bin/activate && python app.py'
             }
         }
     }
