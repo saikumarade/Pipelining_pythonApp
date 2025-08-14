@@ -21,13 +21,14 @@ pipeline {
             }
         }
 
-        stage('Run Python Script') {
+        stage('Run Flask App') {
             steps {
                 sh '. ${VENV}/bin/activate && python app.py'
             }
         }
     }
 }
+
 
 
 
