@@ -1,24 +1,22 @@
-#from flask import Flask, request, render_template
 from model import train_model
 import numpy as np
 
-app = Flask(__name__)
+# Train the model
 model = train_model()
 
-@app.route('/', methods=['GET', 'POST'])
-def home():
-    result = None
-    if request.method == 'POST':
-        try:
-            num1 = float(request.form['num1'])
-            num2 = float(request.form['num2'])
-            input_data = np.array([[num1, num2]])
-            prediction = model.predict(input_data, verbose=0)
-            result = f"Predicted Sum: {prediction[0][0]:.2f}"
-        except:
-            result = "Invalid input. Please enter valid numbers."
-    return render_template('index.html', result=result)
+def main():
+    print("Simple Sum Prediction (no Flask)")
+    try:
+        num1 = float(input("Enter first number: "))
+        num2 = float(input("Enter second number: "))
+        input_data = np.array([[num1, num2]])
+        prediction = model.predict(input_data, verbose=0)
+        print(f"Predicted Sum: {prediction[0][0]:.2f}")
+    except Exception as e:
+        print("Invalid input. Please enter valid numbers.")
+        print("Error:", e)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    main()
+
 
