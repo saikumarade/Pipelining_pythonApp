@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         VENV = "venv"
-        PYTHON = "/opt/homebrew/bin/python3"   // Change if 'which python3' gives a different path
+        PYTHON = "/usr/local/bin/python3"   // Change if 'which python3' gives a different path
     }
 
     stages {
@@ -28,6 +28,7 @@ pipeline {
         }
     }
 }
+
 
 
 
