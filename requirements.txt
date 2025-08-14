@@ -1,7 +1,8 @@
-pip3
+pip
 pandas
 numpy
 tensorflow
 scikit-learn
 flask
+
 
