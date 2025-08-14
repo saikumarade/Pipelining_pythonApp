@@ -4,5 +4,3 @@ numpy
 tensorflow
 scikit-learn
 flask
-
-
