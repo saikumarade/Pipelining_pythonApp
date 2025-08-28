@@ -14,13 +14,14 @@ def home():
             num2 = float(request.form['num2'])
             input_data = np.array([[num1, num2]])
             prediction = model.predict(input_data, verbose=0)
-            result = f"Predicted Sum: {prediction[0][0]:.2f}"
+            result = f"Predicted Sum: {prediction[0][0]:.0f}"
         except Exception as e:
             result = f"Invalid input. Please enter valid numbers. Error: {e}"
     return render_template('index.html', result=result)
 
 if __name__ == '__main__':
     app.run(debug=True)
+
 
 
 
